@@ -4,8 +4,10 @@ import cl.duoc.wim100.model.EstadoPostulante;
 import cl.duoc.wim100.model.Postulante;
 import cl.duoc.wim100.model.Rol;
 import cl.duoc.wim100.model.Usuario;
+import cl.duoc.wim100.repository.EvaluacionRepository;
 import cl.duoc.wim100.repository.PostulanteRepository;
 import cl.duoc.wim100.repository.UsuarioRepository;
+import cl.duoc.wim100.service.PanelService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -17,11 +19,14 @@ public class DataLoader implements CommandLineRunner {
 
     private final UsuarioRepository usuarios;
     private final PostulanteRepository postulantes;
+    private final EvaluacionRepository evaluaciones;
     private final PasswordEncoder encoder;
 
-    public DataLoader(UsuarioRepository usuarios, PostulanteRepository postulantes, PasswordEncoder encoder) {
+    public DataLoader(UsuarioRepository usuarios, PostulanteRepository postulantes,
+                      EvaluacionRepository evaluaciones, PasswordEncoder encoder) {
         this.usuarios = usuarios;
         this.postulantes = postulantes;
+        this.evaluaciones = evaluaciones;
         this.encoder = encoder;
     }
 
@@ -50,6 +55,14 @@ public class DataLoader implements CommandLineRunner {
                             "Especialista en ISO 27001 en una empresa ficticia del sector financiero.",
                             "https://www.linkedin.com/in/fernanda-castillo-demo")
             ));
+        }
+        for (Postulante p : postulantes.findAll()) {
+            EstadoPostulante estado = PanelService.estadoSegunEvaluaciones(p.getEstado(),
+                    evaluaciones.countByPostulanteId(p.getId()));
+            if (estado != p.getEstado()) {
+                p.setEstado(estado);
+                postulantes.save(p);
+            }
         }
     }
 

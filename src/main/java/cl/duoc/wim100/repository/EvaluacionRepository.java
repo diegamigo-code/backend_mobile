@@ -7,6 +7,8 @@ import java.util.List;
 public interface EvaluacionRepository extends JpaRepository<Evaluacion, Long> {
     boolean existsByPostulanteIdAndEvaluadora(Long id, String evaluadora);
 
+    long countByPostulanteId(Long postulanteId);
+
     interface Resultado {
         Long getCandidataId();
         String getCandidataNombre();

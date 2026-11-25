@@ -12,6 +12,15 @@ import java.util.*;
 
 @Service
 public class PanelService {
+    public static final int MINIMO_PARA_EVALUADA = 2;
+
+    public static EstadoPostulante estadoSegunEvaluaciones(EstadoPostulante actual, long cantidad) {
+        if (actual != EstadoPostulante.POSTULADA && actual != EstadoPostulante.EN_EVALUACION) return actual;
+        if (cantidad >= MINIMO_PARA_EVALUADA) return EstadoPostulante.EVALUADA;
+        if (cantidad > 0) return EstadoPostulante.EN_EVALUACION;
+        return actual;
+    }
+
     private final PostulanteRepository postulantes;
     private final EvaluacionRepository evaluaciones;
     private final EventoRepository eventos;
@@ -60,9 +69,12 @@ public class PanelService {
         double total = sumaPonderada / 5.0;
         Evaluacion evaluacion = evaluaciones.save(new Evaluacion(candidata, cuenta.usuario(),
                 req.observacionGeneral().trim(), total, notas));
-        if (candidata.getEstado() == EstadoPostulante.POSTULADA) {
-            candidata.setEstado(EstadoPostulante.EN_EVALUACION);
+        long cantidad = evaluaciones.countByPostulanteId(id);
+        EstadoPostulante nuevoEstado = estadoSegunEvaluaciones(candidata.getEstado(), cantidad);
+        if (nuevoEstado == EstadoPostulante.EVALUADA && candidata.getEstado() != EstadoPostulante.EVALUADA) {
+            eventos.save(new Evento(id, cuenta, "Cambio de estado", "Evaluada con " + cantidad + " evaluaciones"));
         }
+        candidata.setEstado(nuevoEstado);
         eventos.save(new Evento(id, cuenta, "Evaluación registrada", "Puntaje ponderado: " + total + "/100"));
         return evaluacion.getId();
     }

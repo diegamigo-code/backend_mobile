@@ -64,6 +64,13 @@ class FlujoEvaluacionTest {
                 .andExpect(jsonPath("$.ranking[0].promedioPuntaje").value(70.0))
                 .andExpect(jsonPath("$.ranking[0].estado").value("EN_EVALUACION"))
                 .andExpect(jsonPath("$.historial[0].accion").value("Evaluación registrada"));
+        MockHttpSession segunda = login("evaluadora2", "wim2026");
+        api.perform(post(ruta).session(segunda).contentType(APPLICATION_JSON).content(evaluacion))
+                .andExpect(status().isCreated());
+        api.perform(get("/api/panel").session(direccion))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.ranking[0].cantidadEvaluaciones").value(2))
+                .andExpect(jsonPath("$.ranking[0].estado").value("EVALUADA"));
         api.perform(post("/api/auth/logout").session(direccion)).andExpect(status().isNoContent());
     }
 }
