@@ -1,0 +1,30 @@
+name: wim100
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: wim100
+      MYSQL_USER: wim100
+      MYSQL_PASSWORD: ${WIM_DB_PASSWORD:?Define WIM_DB_PASSWORD en .env}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    volumes:
+      - wim100_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$${MYSQL_PASSWORD}\" mysql --protocol=tcp -h 127.0.0.1 -u wim100 -D wim100 -Nse 'SELECT 1'"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+  api:
+    build: .
+    environment:
+      WIM_HOST: 0.0.0.0
+      WIM_DB_URL: jdbc:mysql://mysql:3306/wim100?allowPublicKeyRetrieval=true&sslMode=DISABLED&serverTimezone=UTC
+      WIM_DB_PASSWORD: ${WIM_DB_PASSWORD:?Define WIM_DB_PASSWORD en .env}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${WIM_PORT:-8080}:8080"
+volumes:
+  wim100_data:
