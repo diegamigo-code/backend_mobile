@@ -2,3 +2,5 @@ target/
 .idea/
 *.iml
 .env
+tunnel.log
+tunnel_url.txt

@@ -25,6 +25,6 @@ services:
       mysql:
         condition: service_healthy
     ports:
-      - "127.0.0.1:${WIM_PORT:-8080}:8080"
+      - "${WIM_BIND:-127.0.0.1}:${WIM_PORT:-8080}:8080"
 volumes:
   wim100_data:
