@@ -9,6 +9,8 @@ public interface EvaluacionRepository extends JpaRepository<Evaluacion, Long> {
 
     boolean existsByCandidata_IdAndEvaluadora_Id(Long candidataId, Long evaluadoraId);
 
+    void deleteByCandidata_Id(Long candidataId);
+
     @EntityGraph(attributePaths = {"evaluadora", "puntajes", "puntajes.criterio"})
     List<Evaluacion> findByCandidata_IdOrderByFechaCreacionAsc(Long candidataId);
 

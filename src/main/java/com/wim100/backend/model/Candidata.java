@@ -16,12 +16,12 @@ import java.util.List;
 public class Candidata {
 
     public static final List<String> AREAS = List.of(
-            "Ciberseguridad",
-            "Desarrollo de Software",
-            "Infraestructura y TI",
-            "Datos e IA",
-            "Gestión de Proyectos",
-            "Investigación y I+D"
+            "Seguridad ofensiva (Red Team)",
+            "Seguridad defensiva (Blue Team)",
+            "Gobierno, riesgo y cumplimiento",
+            "Ciberseguridad industrial (OT)",
+            "Forense y respuesta a incidentes",
+            "Investigación y academia"
     );
 
     @Id
@@ -92,4 +92,16 @@ public class Candidata {
     public Instant getFechaRegistro() { return fechaRegistro; }
 
     public void setEstado(EstadoCandidatura estado) { this.estado = estado; }
+
+    public void actualizar(String nombre, String correo, String telefono, String area, int anosExperiencia,
+                           String resumen, String enlacePerfil, String uriCv) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.area = area;
+        this.anosExperiencia = anosExperiencia;
+        this.resumen = resumen;
+        this.enlacePerfil = enlacePerfil;
+        this.uriCv = uriCv;
+    }
 }

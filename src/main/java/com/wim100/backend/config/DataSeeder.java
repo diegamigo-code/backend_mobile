@@ -91,22 +91,22 @@ public class DataSeeder implements ApplicationRunner {
     }
 
     private void sembrarCandidatasYEvaluaciones() {
-        Candidata camila = candidata("Camila Morales", "camila.morales@example.com", "+56 9 1234 5678", "Ciberseguridad", 6,
-                "Especialista en Ethical Hacking y respuesta a incidentes. Certificada CEH y CISSP. Lideró equipos de SOC en la industria bancaria.",
+        Candidata camila = candidata("Camila Morales", "camila.morales@example.com", "+56 9 1234 5678", "Forense y respuesta a incidentes", 6,
+                "Especialista en respuesta a incidentes y análisis forense digital. Certificada GCIH y CISSP. Lideró equipos de SOC en la industria bancaria.",
                 "https://linkedin.com/in/camila-morales-cyber", "cv_camila_morales.pdf", EstadoCandidatura.EN_EVALUACION);
-        Candidata valentina = candidata("Valentina Silva", "valentina.silva@example.com", "+56 9 8765 4321", "Desarrollo de Software", 4,
-                "Ingeniera de Software Full Stack enfocada en Kotlin, Android y microservicios AWS. Apasionada por la arquitectura limpia.",
+        Candidata valentina = candidata("Valentina Silva", "valentina.silva@example.com", "+56 9 8765 4321", "Seguridad ofensiva (Red Team)", 4,
+                "Pentester de aplicaciones web y móviles con certificación OSCP. Ha reportado vulnerabilidades en programas de bug bounty.",
                 "https://linkedin.com/in/valentina-silva-dev", "cv_valentina_silva.pdf", EstadoCandidatura.EVALUADA);
-        Candidata sofia = candidata("Sofía Araya", "sofia.araya@example.com", "+56 9 5555 4433", "Datos e IA", 5,
-                "Científica de Datos experta en Machine Learning, MLOps y NLP. Diseñó e implementó modelos predictivos de riesgo crediticio.",
+        Candidata sofia = candidata("Sofía Araya", "sofia.araya@example.com", "+56 9 5555 4433", "Seguridad defensiva (Blue Team)", 5,
+                "Analista de detección y threat hunting. Diseñó casos de uso SIEM y modelos de detección de anomalías con machine learning.",
                 "https://linkedin.com/in/sofia-araya-data", "cv_sofia_araya.pdf", EstadoCandidatura.POSTULADA);
-        Candidata mariana = candidata("Mariana Fuentes", "mariana.fuentes@example.com", "+56 9 3344 5566", "Infraestructura y TI", 8,
-                "Arquitecta Cloud y DevOps Senior. Experta en Kubernetes, Terraform, CI/CD y migración de infraestructura tradicional.",
+        Candidata mariana = candidata("Mariana Fuentes", "mariana.fuentes@example.com", "+56 9 3344 5566", "Ciberseguridad industrial (OT)", 8,
+                "Arquitecta de seguridad OT para minería y energía. Experta en IEC 62443, segmentación de redes industriales y SCADA.",
                 "https://linkedin.com/in/mariana-fuentes-cloud", "cv_mariana_fuentes.pdf", EstadoCandidatura.SELECCIONADA);
-        Candidata isadora = candidata("Isadora Rojas", "isadora.rojas@example.com", "+56 9 7788 9900", "Gestión de Proyectos", 7,
-                "Project Manager certificada PMP y Agile Coach. Lideró la transformación digital de múltiples proyectos en tecnología.",
+        Candidata isadora = candidata("Isadora Rojas", "isadora.rojas@example.com", "+56 9 7788 9900", "Gobierno, riesgo y cumplimiento", 7,
+                "Consultora GRC certificada ISO 27001 Lead Auditor. Lideró la implementación de SGSI y la gestión de riesgos en banca y retail.",
                 "https://linkedin.com/in/isadora-rojas-pm", "cv_isadora_rojas.pdf", EstadoCandidatura.POSTULADA);
-        Candidata gabriela = candidata("Gabriela Castro", "gabriela.castro@example.com", "+56 9 6677 8899", "Investigación y I+D", 3,
+        Candidata gabriela = candidata("Gabriela Castro", "gabriela.castro@example.com", "+56 9 6677 8899", "Investigación y academia", 3,
                 "Investigadora en Criptografía Avanzada. MSc en Ciencias de la Computación con publicaciones en conferencias internacionales.",
                 "https://linkedin.com/in/gabriela-castro-research", "cv_gabriela_castro.pdf", EstadoCandidatura.EN_EVALUACION);
 

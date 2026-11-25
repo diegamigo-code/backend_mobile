@@ -18,6 +18,8 @@ public class RegistroHistorial {
         public static final String EVALUACION_CREADA = "Evaluación registrada";
         public static final String INTENTO_DUPLICADO = "Intento de evaluación duplicada";
         public static final String CAMBIO_ESTADO = "Cambio de estado";
+        public static final String EDICION_CANDIDATA = "Edición de candidatura";
+        public static final String ELIMINACION_CANDIDATA = "Eliminación de candidatura";
         public static final String INICIO_SESION = "Inicio de sesión";
         public static final String INICIO_SESION_FALLIDO = "Inicio de sesión fallido";
         public static final String CIERRE_SESION = "Cierre de sesión";

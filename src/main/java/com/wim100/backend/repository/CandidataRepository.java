@@ -11,4 +11,6 @@ public interface CandidataRepository extends JpaRepository<Candidata, Long> {
     List<Candidata> findByNombreContainingIgnoreCaseOrAreaContainingIgnoreCaseOrderByIdDesc(String nombre, String area);
 
     boolean existsByCorreoIgnoreCase(String correo);
+
+    boolean existsByCorreoIgnoreCaseAndIdNot(String correo, Long id);
 }

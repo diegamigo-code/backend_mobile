@@ -84,6 +84,11 @@ Errores: `401` sin token / token inválido o expirado, `403` rol sin permiso. To
 | GET | `/api/candidatas/{id}/evaluaciones` | autenticada | Evaluaciones con puntaje por criterio |
 | POST | `/api/candidatas/{id}/evaluaciones` | Evaluadora | Registrar evaluación |
 | GET | `/api/candidatas/{id}/historial` | Dirección | Auditoría de la candidata |
+| GET | `/api/postulantes` · `/{id}` | autenticada | Contrato de la app Android (ver abajo) |
+| POST | `/api/postulantes` | Evaluadora, Dirección | Registrar postulante |
+| PUT | `/api/postulantes/{id}` | Evaluadora | Editar postulante |
+| PATCH | `/api/postulantes/{id}/estado` | Evaluadora (estados intermedios), Dirección (también resolver) | Cambiar estado |
+| DELETE | `/api/postulantes/{id}` | Evaluadora | Eliminar postulante y sus evaluaciones |
 | GET | `/api/criterios` | autenticada | Matriz de criterios y pesos |
 | GET | `/api/catalogos/areas` · `/estados` | autenticada | Listas para formularios |
 | GET | `/api/ranking` | Dirección | Ranking consolidado con categoría |
@@ -91,6 +96,24 @@ Errores: `401` sin token / token inválido o expirado, `403` rol sin permiso. To
 | GET/POST | `/api/usuarios` | Dirección | Listar / crear cuentas |
 
 Ejemplos listos para ejecutar en `api.http`.
+
+## Contrato con la app Android
+
+`/api/postulantes` usa los nombres de campos de la app (`PostulanteDto` en Kotlin):
+
+```json
+{ "id": 1, "nombre": "Camila Morales", "correo": "camila.morales@example.com",
+  "telefono": "+56 9 1234 5678", "area": "Forense y respuesta a incidentes",
+  "aniosExperiencia": 6, "resumenExperiencia": "...", "linkedinUrl": "https://...",
+  "cvNombre": "cv_camila_morales.pdf", "estado": "EN_EVALUACION",
+  "fechaRegistro": 1764072000000, "registradaPor": "Sistema" }
+```
+
+`fechaRegistro` va en milisegundos. `id`, `estado`, `fechaRegistro` y `registradaPor` se ignoran al crear o editar:
+los define el servidor (la autora se toma del token).
+
+Áreas válidas: Seguridad ofensiva (Red Team), Seguridad defensiva (Blue Team), Gobierno, riesgo y cumplimiento,
+Ciberseguridad industrial (OT), Forense y respuesta a incidentes, Investigación y academia.
 
 ## Reglas de negocio (las mismas de la app)
 

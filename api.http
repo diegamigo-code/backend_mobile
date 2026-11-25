@@ -37,12 +37,44 @@ Content-Type: application/json
   "nombre": "Josefa Pérez",
   "correo": "josefa.perez@test.cl",
   "telefono": "+56 9 1111 2222",
-  "area": "Ciberseguridad",
+  "area": "Seguridad defensiva (Blue Team)",
   "anosExperiencia": 3,
   "resumen": "Analista SOC con experiencia en monitoreo SIEM y respuesta a incidentes.",
   "enlacePerfil": "https://linkedin.com/in/josefa-perez",
   "uriCv": "cv_josefa_perez.pdf"
 }
+
+### Postulantes (contrato que usa la app Android)
+GET {{base}}/api/postulantes
+Authorization: Bearer {{token}}
+
+### Crear postulante (formato de la app)
+POST {{base}}/api/postulantes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Antonia Vega",
+  "correo": "antonia.vega@ejemplo.cl",
+  "telefono": "+56 9 3333 4444",
+  "area": "Seguridad ofensiva (Red Team)",
+  "aniosExperiencia": 2,
+  "resumenExperiencia": "Pentester junior con experiencia en CTF y auditorías de aplicaciones web.",
+  "linkedinUrl": "https://www.linkedin.com/in/antonia-vega-ficticia",
+  "cvNombre": "cv_antonia_vega.pdf",
+  "registradaPor": "Andrea Torres"
+}
+
+### Cambiar estado de un postulante (Evaluadora: estados intermedios; Dirección: también resolver)
+PATCH {{base}}/api/postulantes/3/estado
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "estado": "EN_EVALUACION" }
+
+### Eliminar postulante (solo Evaluadora)
+DELETE {{base}}/api/postulantes/7
+Authorization: Bearer {{token}}
 
 ### Evaluar candidata 3 (solo Evaluadora; la evaluadora sale del token)
 POST {{base}}/api/candidatas/3/evaluaciones
