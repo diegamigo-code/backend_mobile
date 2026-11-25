@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:wim100;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:ZGV2LXNvbG8tbG9jYWwtd2ltMTAwLWNsYXZlLWRlLTMyLWJ5dGVzLW1pbmltbw==}
+  cors:
+    allowed-origins: "*"
+
+logging:
+  level:
+    com.wim100.backend: DEBUG
